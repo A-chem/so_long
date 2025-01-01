@@ -1,0 +1,4 @@
+ The **graphical environment** refers to the overall setup in which graphics are displayed, typically including windows, screens, and UI elements.
+ 
+- In the context of **so_long**, the graphical environment includes the window where the game will be displayed, the handling of user input (e.g., from the keyboard), and managing graphical elements like the game map.
+- This environment is created using [[Minilibx]], which serves as an abstraction layer for drawing and interacting with the screen. **MinilibX** provides the necessary functions to initialize a window, render images, and handle input even

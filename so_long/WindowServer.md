@@ -1,0 +1,1 @@
+**WindowServer** is a crucial system process in **macOS** that manages windowing, graphical output, and user interaction. It acts as the intermediary between applications and the underlying graphical hardware to ensure that windows are correctly displayed and user inputs (like clicks, keystrokes, etc.) are handled properly.

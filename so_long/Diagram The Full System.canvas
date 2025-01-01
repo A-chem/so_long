@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"3ad5f3c4b97edf33","type":"file","file":"Minilibx.md","x":-120,"y":-1960,"width":400,"height":400},
+		{"id":"8c1a138ec9fe63b6","type":"file","file":"AppKit.md","x":-120,"y":-1353,"width":400,"height":400},
+		{"id":"b0f7ebbf570def07","type":"file","file":"WindowServer.md","x":-120,"y":-760,"width":400,"height":400},
+		{"id":"e414cb763efb6255","type":"file","file":"OpenGL.md","x":-120,"y":-160,"width":400,"height":400},
+		{"id":"07b37dfae7fa7fe9","type":"file","file":"Quartz Compositor.md","x":-120,"y":480,"width":400,"height":400},
+		{"id":"80b1e190da14608f","type":"file","file":"GPU.md","x":-120,"y":1080,"width":400,"height":400},
+		{"id":"7c7026bc0564bd21","type":"text","text":"**Screen**","x":-45,"y":1680,"width":250,"height":60}
+	],
+	"edges":[
+		{"id":"98daf094de444e4b","fromNode":"3ad5f3c4b97edf33","fromSide":"bottom","toNode":"8c1a138ec9fe63b6","toSide":"top","color":"6"},
+		{"id":"6a36b6c885c32fdb","fromNode":"8c1a138ec9fe63b6","fromSide":"bottom","toNode":"b0f7ebbf570def07","toSide":"top","color":"6"},
+		{"id":"4a981b6333289b38","fromNode":"b0f7ebbf570def07","fromSide":"bottom","toNode":"e414cb763efb6255","toSide":"top","color":"6"},
+		{"id":"78d7205f369646ac","fromNode":"e414cb763efb6255","fromSide":"bottom","toNode":"07b37dfae7fa7fe9","toSide":"top","color":"6"},
+		{"id":"b27688057d8e70cc","fromNode":"07b37dfae7fa7fe9","fromSide":"bottom","toNode":"80b1e190da14608f","toSide":"top","color":"6"},
+		{"id":"44e4606a07d2c79a","fromNode":"80b1e190da14608f","fromSide":"bottom","toNode":"7c7026bc0564bd21","toSide":"top","color":"6"}
+	]
+}
