@@ -14,5 +14,10 @@ int main(int argc, char **argv)
         write(1, "Your map not valid !!!\n", 24);
         return (0);
     }
+    else
+    {
+        write(1, "Your map is valid !!!\n", 23);
+        return (0);
+    }
     return 0;
 }
