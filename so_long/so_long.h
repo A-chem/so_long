@@ -9,15 +9,16 @@
 typedef struct data_map
 {   
     int fd;
-    int num_line;
+    size_t num_line;
     char *str;
     char **map;
-    int count_PE;
-    int count_C;
+    size_t count_PE;
+    size_t count_C;
 }              t_maps;
 
 int check_map(char *pat_str);
 char    **ft_split(char *s, char c);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif 
 
