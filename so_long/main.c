@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TILE_SIZE 64
+#define TILE_SIZE 50
 
 void render_map(void *mlx, void *win, char **map, void **textures)
 {

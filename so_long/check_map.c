@@ -44,14 +44,14 @@ static int test_ff(char **map)
 	}
 	return (1);
 }
-static int check_ff(D_map D_map)
+static int check_ff(D_game game)
 {
 	size_t i;
 	size_t j;
 	char **copy_map;
 
 	i = 0;
-	copy_map = ft_split(D_map.str, '\n');
+	copy_map = ft_split(game.str, '\n');
 	if(!copy_map)
 		return (0);
 	while (copy_map[i])
@@ -61,7 +61,7 @@ static int check_ff(D_map D_map)
 		{
 			if (copy_map[i][j] == 'P')
 			{
-				flood_fill(i, j, D_map.num_line, copy_map);
+				flood_fill(i, j, game.num_line, copy_map);
 				if(test_ff(copy_map) == 0) 
 				  	return (0);
 				break;
@@ -73,28 +73,28 @@ static int check_ff(D_map D_map)
 	return (1);
 }
 
-static int	check_rect(D_map D_map)
+static int	check_rect(D_game *game)
 {
 	size_t	i;
 	size_t j;
 	
 	i = 0;
 	j = 0;
-	while (i < D_map.num_line)
+	while (i < game->num_line)
 	{
-		if (i != D_map.num_line - 1)
+		if (i != game->num_line - 1)
 		{
-			if (ft_strlen(D_map.map[i]) != ft_strlen(D_map.map[i+1]))
+			if (ft_strlen(game->map[i]) != ft_strlen(game->map[i+1]))
 				return (0);
-			if (i == 0 || i == D_map.num_line - 1)
-				while (D_map.map[i][j])
+			if (i == 0 || i == game->num_line - 1)
+				while (game->map[i][j])
 				{
-					if (D_map.map[i][j] != '1')
+					if (game->map[i][j] != '1')
 					return (0);
 					j++;
 				}
-			if (D_map.map[i][0] != '1' 
-				|| D_map.map[i][ft_strlen(D_map.map[i]) - 1] != '1')
+			if (game->map[i][0] != '1' 
+				|| game->map[i][ft_strlen(game->map[i]) - 1] != '1')
 			return (0);
 		}
 		i++;
@@ -105,57 +105,57 @@ static int is_valid_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'P' || c == 'E' || c == 'C');
 }
-static int check_wall_elements(D_map D_map)
+static int check_wall_elements(D_game *game)
 {
 	size_t         i;
 	size_t         j;
 	
 	i = 0;
-	D_map.count_PE = 0;
-	D_map.count_C = 0;
-	while (i < D_map.num_line)
+	game->count_PE = 0;
+	game->count_C = 0;
+	while (i < game->num_line)
 	{
 		j = 0;
-		while (D_map.map[i][j] != '\0')
+		while (game->map[i][j] != '\0')
 		{
-			if (!is_valid_char(D_map.map[i][j]))
+			if (!is_valid_char(game->map[i][j]))
 			return (0);
-			if (D_map.map[i][j] == 'P' || D_map.map[i][j] == 'E')
-				D_map.count_PE++;
-			if (D_map.map[i][j] == 'C')
-				D_map.count_C++;
+			if (game->map[i][j] == 'P' || game->map[i][j] == 'E')
+				game->count_PE++;
+			if (game->map[i][j] == 'C')
+				game->count_C++;
 			j++;
 		}
 		i++;
 	}
-	if (D_map.count_PE != 2 || D_map.count_C < 1)
+	if (game->count_PE != 2 || game->count_C < 1)
 		return (0);
 	return (1);
 }
-int	check_map(char *pat_str, D_map *ptr)
+int	check_map(char *pat_str, D_game *game)
 {
 	char    *line;
      
-	ptr->fd  = open(pat_str, O_RDONLY);
-	if (ptr->fd == -1)
+	game->fd  = open(pat_str, O_RDONLY);
+	if (game->fd == -1)
 		return (0);
-	ptr->num_line = 0;
-	ptr->str = NULL;
+	game->num_line = 0;
+	game->str = NULL;
 	while (1)
 	{
-		line = get_next_line(ptr->fd);
+		line = get_next_line(game->fd);
 		if (!line)
 			break ;
-		ptr->str = ft_strjoin(ptr->str, line);
-		if (!ptr->str || line[0] == '\n')
+		game->str = ft_strjoin(game->str, line);
+		if (!game->str || line[0] == '\n')
 			return (0);
-		ptr->num_line++;
+		game->num_line++;
 	}
-	ptr->map = ft_split(ptr->str, '\n');
-	if((check_rect(*ptr) == 0) || check_wall_elements(*ptr) == 0)
+	game->map = ft_split(game->str, '\n');
+	if((check_rect(game) == 0) || check_wall_elements(game) == 0)
 		return (0);
 		
-	if(check_ff(*ptr) == 0)
+	if(check_ff(*game) == 0)
 	     return (0); 
 		    
 		return (1);
