@@ -1,91 +1,90 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   events.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achemlal <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 16:28:06 by achemlal          #+#    #+#             */
+/*   Updated: 2025/01/07 16:35:45 by achemlal         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void  find_player(D_game *game)
+void	find_player(t_game *g)
 {
- 
-    int i;
-    int j;
+	int	i;
+	int	j;
 
-    i = 0;
-    while (game->map[i])
-    {
-        j = 0;
-        while (game->map[i][j])
-        {
-            if (game->map[i][j] == 'P')
-            {
-                game->player_x = i;
-                game->player_y = j;
-                return;
-            }
-            j++;
-        }
-       i++;
-    }
-}
-void action_player(int key, D_game *game)
-{
-        find_player(game);
-        if(key == W_KEY)
-        move_player(game, game->player_x - 1, game->player_y);
-        if(key == S_KEY)
-        move_player(game, game->player_x + 1, game->player_y);
-        if(key == A_KEY)
-        move_player(game, game->player_x, game->player_y - 1);
-        if(key == D_KEY)
-        move_player(game, game->player_x, game->player_y + 1);
-        
-}
-int handle_keypress(int keycode, D_game *game)
-{
-    if (keycode == ESC_KEY)
-      exit_window(game);
-    if (keycode == W_KEY)
-        action_player(keycode, game);
-    if (keycode == S_KEY)
-        action_player(keycode, game);  
-    if (keycode == A_KEY)
-        action_player(keycode, game);   
-    if (keycode == D_KEY)
-        action_player(keycode, game);
-        if ( game ->map[game->player_x][game->player_y] != '1' && game->map[game->player_x][game->player_y] != 'E')
-        {
-           game->move++;
-           printf("move : %d\n", game->move);
-        }
-    return (0);
+	i = 0;
+	while (g->map[i])
+	{
+		j = 0;
+		while (g->map[i][j])
+		{
+			if (g->map[i][j] == 'P')
+			{
+				g->player_x = i;
+				g->player_y = j;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
 }
 
-void move_player(D_game *game, int new_x, int new_y)
+static void	move_player(t_game *g, int new_x, int new_y)
 {
-    
-    if (game->map[new_x][new_y] == '0')
-    {
-       game ->map[game->player_x][game->player_y] = '0';
-       game ->map[new_x][new_y] = 'P';
-       mlx_put_image_to_window( game->mlx, game->win, game->textures[1], new_x * 50, new_y * 50);
-       render_map(game);
-    }
-    if  (game->map[new_x][new_y] == '1')
-     return ;
-    if (game->map[new_x][new_y] == 'C')
-    {
-        game->map[new_x][new_y] = '0';
-        mlx_put_image_to_window( game->mlx, game->win, game->textures[4], new_x * 50, new_y * 50);
-        game->count_C--;
-    }
-    if (game->map[new_x][new_y] == 'E' && game->count_C == 0)
-    {
-        mlx_put_image_to_window( game->mlx, game->win, game->textures[4], new_x * 50, new_y * 50);
-        exit_window(game);
-    }
-    else
-        return ;
-
+	if (g->map[new_x][new_y] == '0')
+	{
+		g->map[g->player_x][g->player_y] = '0';
+		g->map[new_x][new_y] = 'P';
+		g->move++;
+	}
+	if (g->map[new_x][new_y] == 'C')
+	{
+		g->move++;
+		g->map[g->player_x][g->player_y] = '0';
+		g->map[new_x][new_y] = 'P';
+		g->count_c--;
+	}
+	if (g->map[new_x][new_y] == 'E' && g->count_c == 0)
+		exit_window(g);
+	if (g->map[new_x][new_y] == 'E' && g->count_c != 0)
+		return ;
+	if (g->map[new_x][new_y] == '1')
+		return ;
+	render_map(g);
+	printf("Moves: %d\n", g->move);
 }
-void exit_window(D_game *game)
+
+static void	action_player(int key, t_game *g)
 {
-    mlx_clear_window(game->mlx, game->win);
-    mlx_destroy_window(game->mlx, game->win);
-    exit(0);
+	find_player(g);
+	if (key == W_KEY)
+		move_player(g, g->player_x - 1, g->player_y);
+	if (key == S_KEY)
+		move_player(g, g->player_x + 1, g->player_y);
+	if (key == A_KEY)
+		move_player(g, g->player_x, g->player_y - 1);
+	if (key == D_KEY)
+		move_player(g, g->player_x, g->player_y + 1);
+}
+
+int	handle_keypress(int key, t_game *g)
+{
+	if (key == ESC_KEY)
+		exit_window(g);
+	if (key == W_KEY || key == S_KEY || key == A_KEY || key == D_KEY)
+		action_player(key, g);
+	return (0);
+}
+
+void	exit_window(t_game *game)
+{
+	mlx_clear_window(game->mlx, game->win);
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
 }

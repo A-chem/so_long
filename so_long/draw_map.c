@@ -1,70 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: achemlal <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/07 16:53:22 by achemlal          #+#    #+#             */
+/*   Updated: 2025/01/07 18:03:57 by achemlal         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-void get_map_dimensions(D_game *game)
+void	get_map_dimensions(t_game *g)
 {
-    size_t row = 0;
-    size_t col;
-      
-    while (game->map[row])
-    {
-        col = 0;
-        while (game->map[row][col])
+	size_t	row;
+	size_t	col;
 
-        {
-            col++;
-        }
-        row++;
-    }
-    game->win_width = col * 50;
-    game->win_height = row * 50;
-    }
-void load_img(D_game *game)
-{
-    int i;
-
-    i = 0;
-    while(i < 5)
-    {
-        if (i == 0)
-        game->textures[i] = mlx_xpm_file_to_image(game->mlx, "textures/wall.xpm", &game->img_width, &game->img_height);
-        else if (i == 1)
-            game->textures[i] = mlx_xpm_file_to_image(game->mlx, "textures/route.xpm", &game->img_width, &game->img_height);
-        else if (i == 2)
-            game->textures[i] = mlx_xpm_file_to_image(game->mlx, "textures/coins.xpm", &game->img_width, &game->img_height);
-        else if (i == 3)
-          game->textures[i] = mlx_xpm_file_to_image(game->mlx, "textures/exit.xpm", &game->img_width, &game->img_height);
-        else if (i == 4)
-          game->textures[i] = mlx_xpm_file_to_image(game->mlx, "textures/player1.xpm", &game->img_width, &game->img_height);
-          if (!game->textures[i])
-                exit(1);
-        i++;
-    }
+	row = 0;
+	while (g->map[row])
+	{
+		col = 0;
+		while (g->map[row][col])
+		{
+			col++;
+		}
+		row++;
+	}
+	g->ww = col * 50;
+	g->wh = row * 50;
 }
-void render_map(D_game *game)
-{
-    int x;
-    int y; 
 
-    game->row = 0;
-    while (game->map[game->row])
-    {
-        game->col = 0;
-        while (game->map[game->row][game->col])
-        {
-            x = game->col * 50;
-            y = game->row * 50;
-            if (game->map[game->row][game->col] == '1')
-                mlx_put_image_to_window(game->mlx, game->win, game->textures[0], x, y);
-            else if (game->map[game->row][game->col] == '0')
-                mlx_put_image_to_window(game->mlx, game->win, game->textures[1], x, y);
-            else if (game->map[game->row][game->col] == 'C')
-                mlx_put_image_to_window(game->mlx, game->win, game->textures[2], x, y);  
-            else if (game->map[game->row][game->col] == 'E')
-                mlx_put_image_to_window(game->mlx, game->win, game->textures[3], x, y);
-            else if (game->map[game->row][game->col] == 'P')
-                mlx_put_image_to_window(game->mlx, game->win, game->textures[4], x, y); 
-            game->col++;
-        }
-        game->row++;
-    }
+static void	load_texture(t_game *g, int index, char *f)
+{
+	g->textures[index] = mlx_xpm_file_to_image(g->mlx, f, &g->iw, &g->ih);
+	if (!g->textures[index])
+		exit_window(g);
+}
+
+void	load_img(t_game *g)
+{
+	load_texture(g, 0, "textures/wall.xpm");
+	load_texture(g, 1, "textures/route.xpm");
+	load_texture(g, 2, "textures/nud.xpm");
+	load_texture(g, 3, "textures/exit.xpm");
+	load_texture(g, 4, "textures/player.xpm");
+}
+
+void	render_map(t_game *g)
+{
+	int	x;
+	int	y;
+
+	g->row = 0;
+	while (g->map[g->row])
+	{
+		g->col = 0;
+		while (g->map[g->row][g->col])
+		{
+			x = g->col * 50;
+			y = g->row * 50;
+			if (g->map[g->row][g->col] == '1')
+				mlx_put_image_to_window(g->mlx, g->win, g->textures[0], x, y);
+			else if (g->map[g->row][g->col] == '0')
+				mlx_put_image_to_window(g->mlx, g->win, g->textures[1], x, y);
+			else if (g->map[g->row][g->col] == 'C')
+				mlx_put_image_to_window(g->mlx, g->win, g->textures[2], x, y);
+			else if (g->map[g->row][g->col] == 'E')
+				mlx_put_image_to_window(g->mlx, g->win, g->textures[3], x, y);
+			else if (g->map[g->row][g->col] == 'P')
+				mlx_put_image_to_window(g->mlx, g->win, g->textures[4], x, y);
+			g->col++;
+		}
+		g->row++;
+	}
 }
