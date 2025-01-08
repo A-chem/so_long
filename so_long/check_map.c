@@ -50,11 +50,6 @@ static int	check_rect(t_game *g)
 	return (1);
 }
 
-static int	is_valid_char(char c)
-{
-	return (c == '0' || c == '1' || c == 'P' || c == 'E' || c == 'C');
-}
-
 static int	check_wall_elements(t_game *g)
 {
 	size_t	i;
@@ -68,7 +63,7 @@ static int	check_wall_elements(t_game *g)
 		j = 0;
 		while (g->map[i][j] != '\0')
 		{
-			if (!is_valid_char(g->map[i][j]))
+			if (!ft_strchr("01PEC", g->map[i][j]))
 				return (0);
 			if (g->map[i][j] == 'P' || g->map[i][j] == 'E')
 				g->count_pe++;
@@ -83,6 +78,33 @@ static int	check_wall_elements(t_game *g)
 	return (1);
 }
 
+static int	result_check(t_game *g, char *line)
+{
+	char	*temp;
+
+	while (1)
+	{
+		line = get_next_line(g->fd);
+		if (!line)
+			break ;
+		temp = g->str;
+		g->str = ft_strjoin(g->str, line);
+		free(temp);
+		if (!g->str || line[0] == '\n' || line[0] == '\0')
+			return (cleanup_game(g), free(line), 0);
+		free(line);
+		g->num_line++;
+	}
+	g->map = ft_split(g->str, '\n');
+	if (!g->map)
+		return (cleanup_game(g), 0);
+	if (check_rect(g) == 0 || check_wall_elements(g) == 0)
+		return (cleanup_game(g), 0);
+	if (check_ff(*g) == 0)
+		return (cleanup_game(g), 0);
+	return (1);
+}
+
 int	check_map(char *pat_str, t_game *g)
 {
 	char	*line;
@@ -92,20 +114,8 @@ int	check_map(char *pat_str, t_game *g)
 		return (0);
 	g->num_line = 0;
 	g->str = NULL;
-	while (1)
-	{
-		line = get_next_line(g->fd);
-		if (!line)
-			break ;
-		g->str = ft_strjoin(g->str, line);
-		if (!g->str || line[0] == '\n' || line[0] == '\0')
-			return (0);
-		g->num_line++;
-	}
-	g->map = ft_split(g->str, '\n');
-	if (check_rect(g) == 0 || check_wall_elements(g) == 0)
-		return (0);
-	if (check_ff(*g) == 0)
+	line = NULL;
+	if (result_check(g, line) == 0)
 		return (0);
 	return (1);
 }

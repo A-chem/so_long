@@ -81,10 +81,3 @@ int	handle_keypress(int key, t_game *g)
 		action_player(key, g);
 	return (0);
 }
-
-void	exit_window(t_game *game)
-{
-	mlx_clear_window(game->mlx, game->win);
-	mlx_destroy_window(game->mlx, game->win);
-	exit(0);
-}

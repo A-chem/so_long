@@ -50,10 +50,12 @@ int		check_map(char *pat_str, t_game *g);
 char	**ft_split(char *s, char c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	get_map_dimensions(t_game *g);
-int		check_ff(t_game game);
+int		check_ff(t_game g);
 void	load_img(t_game *g);
 void	render_map(t_game *g);
 int		handle_keypress(int keycode, t_game *g);
-void	exit_window(t_game *game);
+int		exit_window(t_game *g);
+void	free_map(char **map);
+void	cleanup_game(t_game *g);
 
 #endif

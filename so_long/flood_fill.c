@@ -16,7 +16,7 @@ static void	flood_fill(size_t x, size_t y, size_t num_line, char **map)
 {
 	if (x < 0 || y < 0 || x > num_line || y > ft_strlen(map[0]))
 		return ;
-	if (map[x][y] == '1' || map[x][y] == 'V')
+	if (map[x][y] == '1' || map[x][y] == 'V' || map[x][y] == 'E')
 		return ;
 	map[x][y] = 'V';
 	flood_fill(x + 1, y, num_line, map);
@@ -37,7 +37,7 @@ static int	test_ff(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'C' || map[i][j] == 'E' || map[i][j] == 'P')
+			if (map[i][j] == 'C' || map[i][j] == 'P')
 				return (0);
 			j++;
 		}
@@ -55,7 +55,7 @@ int	check_ff(t_game g)
 	i = 0;
 	copy_map = ft_split(g.str, '\n');
 	if (!copy_map)
-		return (0);
+		return (free_map(copy_map), free(g.str), 0);
 	while (copy_map[i])
 	{
 		j = 0;
@@ -65,12 +65,12 @@ int	check_ff(t_game g)
 			{
 				flood_fill(i, j, g.num_line, copy_map);
 				if (test_ff(copy_map) == 0)
-					return (0);
+					return (free_map(copy_map), free(g.str), 0);
 				break ;
 			}
 			j++;
 		}
 		i++;
 	}
-	return (1);
+	return (free_map(copy_map), free(g.str), 1);
 }

@@ -28,13 +28,6 @@ static int	is_valid_map( char *pat_str, t_game *g)
 		return (1);
 }
 
-int close_window(t_game *g)
-{
-	(void)g;
-	exit(0);
-	return 0;
-}
-
 static int	is_graphic_mlx(t_game *g)
 {
 	g->mlx = mlx_init();
@@ -52,13 +45,12 @@ static int	is_graphic_mlx(t_game *g)
 	load_img(g);
 	render_map(g);
 	g->move = 0;
-	//mlx_key_hook(g->win, handle_keypress, g);
-	mlx_hook(g->win,2 , 0, handle_keypress, g);
-	mlx_hook(g->win, 17, 0, close_window, g);
+	mlx_hook(g->win, 2, 0, handle_keypress, g);
+	mlx_hook(g->win, 17, 0, exit_window, g);
 	mlx_loop(g->mlx);
 	return (0);
-
 }
+
 int	main(int argc, char **argv)
 {
 	char	*pat_str;
@@ -74,7 +66,6 @@ int	main(int argc, char **argv)
 		return (0);
 	else
 	{
-		is_valid_map(pat_str, &game);
 		is_graphic_mlx(&game);
 	}
 	return (0);
