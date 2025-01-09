@@ -1,47 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achemlal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 13:39:54 by achemlal          #+#    #+#             */
-/*   Updated: 2025/01/09 13:40:02 by achemlal         ###   ########.fr       */
+/*   Created: 2025/01/07 17:30:19 by achemlal          #+#    #+#             */
+/*   Updated: 2025/01/07 17:30:24 by achemlal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_map(char **map)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	i;
-
-	if (!map)
-		return ;
-	i = 0;
-	while (map[i])
+	if (n == 0)
+		return (0);
+	while ((*s1 || *s2) && n > 0)
 	{
-		free(map[i]);
-		i++;
+		if (*s1 != *s2)
+			return ((unsigned char) *s1 - (unsigned char) *s2);
+		s1++;
+		s2++;
+		n--;
 	}
-	free(map);
-	return ;
-}
-
-void	cleanup_game(t_game *g)
-{
-	if (g->str)
-		free(g->str);
-	if (g->map)
-		free_map(g->map);
-	if (g->fd >= 0)
-		close(g->fd);
-}
-
-int	exit_window(t_game *g)
-{
-	mlx_clear_window(g->mlx, g->win);
-	mlx_destroy_window(g->mlx, g->win);
-	exit(0);
 	return (0);
 }

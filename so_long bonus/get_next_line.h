@@ -1,47 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achemlal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/09 13:39:54 by achemlal          #+#    #+#             */
-/*   Updated: 2025/01/09 13:40:02 by achemlal         ###   ########.fr       */
+/*   Created: 2024/12/06 11:38:49 by achemlal          #+#    #+#             */
+/*   Updated: 2024/12/06 11:51:22 by achemlal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	free_map(char **map)
-{
-	int	i;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
-	if (!map)
-		return ;
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
-	return ;
-}
+# include <unistd.h>
+# include <stdlib.h>
+# include <limits.h>
 
-void	cleanup_game(t_game *g)
-{
-	if (g->str)
-		free(g->str);
-	if (g->map)
-		free_map(g->map);
-	if (g->fd >= 0)
-		close(g->fd);
-}
+char	*get_next_line(int fd);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(char *s1);
+size_t	ft_strlen(char *s);
+char	*ft_strchr(char *s, int c);
+char	*ft_substr(char *s, unsigned int start, size_t len);
 
-int	exit_window(t_game *g)
-{
-	mlx_clear_window(g->mlx, g->win);
-	mlx_destroy_window(g->mlx, g->win);
-	exit(0);
-	return (0);
-}
+#endif
