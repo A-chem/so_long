@@ -16,7 +16,8 @@ static void	flood_fill(size_t x, size_t y, size_t num_line, char **map)
 {
 	if (x < 0 || y < 0 || x > num_line || y > ft_strlen(map[0]))
 		return ;
-	if (map[x][y] == '1' || map[x][y] == 'V' || map[x][y] == 'E')
+	if (map[x][y] == '1' || map[x][y] == 'V' || map[x][y] == 'E'
+		|| map[x][y] == 'N')
 		return ;
 	map[x][y] = 'V';
 	flood_fill(x + 1, y, num_line, map);

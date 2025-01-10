@@ -6,7 +6,7 @@
 /*   By: achemlal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:31:12 by achemlal          #+#    #+#             */
-/*   Updated: 2025/01/07 17:38:00 by achemlal         ###   ########.fr       */
+/*   Updated: 2025/01/10 11:51:04 by achemlal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,23 @@
 # define S_KEY 1
 # define D_KEY 2
 
+typedef struct data_enemy
+{
+	size_t	enemy_x;
+	size_t	enemy_y;
+	int		direction;
+	struct  data_enemy *next;
+}			t_enemy;
+
 typedef struct data_game
 {
 	int		fd;
 	size_t	num_line;
 	char	*str;
 	char	**map;
-	size_t	count_pen;
+	size_t	count_pe;
 	size_t	count_c;
+	size_t	count_n;
 	void	*mlx;
 	void	*win;
 	size_t	ww;
@@ -45,9 +54,8 @@ typedef struct data_game
 	size_t	player_x;
 	size_t	player_y;
 	int		player_anim;
-	size_t  count_exit;
-	size_t		enemy_x;
-	size_t		enemy_y;
+	size_t	count_exit;
+	t_enemy *enemies; 
 }			t_game;
 
 int		check_map(char *pat_str, t_game *g);
@@ -61,6 +69,8 @@ int		handle_keypress(int keycode, t_game *g);
 int		exit_window(t_game *g);
 void	free_map(char **map);
 void	cleanup_game(t_game *g);
-void	move_enemy_cyclically(t_game *g);
+int		check_enemy(t_game *g);
+void 	move_enemy(t_game *g);
+int loop_game(t_game *g);
 
 #endif

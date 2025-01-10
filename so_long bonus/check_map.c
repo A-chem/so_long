@@ -56,7 +56,7 @@ static int	check_wall_elements(t_game *g)
 	size_t	j;
 
 	i = 0;
-	g->count_pen = 0;
+	g->count_pe = 0;
 	g->count_c = 0;
 	while (i < g->num_line)
 	{
@@ -65,16 +65,15 @@ static int	check_wall_elements(t_game *g)
 		{
 			if (!ft_strchr("01PECN", g->map[i][j]))
 				return (0);
-			if (g->map[i][j] == 'P' || g->map[i][j] == 'E'
-				|| g->map[i][j] == 'N')
-				g->count_pen++;
+			if (g->map[i][j] == 'P' || g->map[i][j] == 'E')
+				g->count_pe++;
 			if (g->map[i][j] == 'C')
 				g->count_c++;
 			j++;
 		}
 		i++;
 	}
-	if (g->count_pen != 3 || g->count_c < 1)
+	if (g->count_pe != 2 || g->count_c < 1)
 		return (0);
 	return (1);
 }
@@ -99,7 +98,7 @@ static int	result_check(t_game *g, char *line)
 	g->map = ft_split(g->str, '\n');
 	if (!g->map)
 		return (cleanup_game(g), 0);
-	if (check_rect(g) == 0 || check_wall_elements(g) == 0)
+	if (check_rect(g) == 0 || check_wall_elements(g) == 0 || check_enemy(g) == 0)
 		return (cleanup_game(g), 0);
 	g->count_exit = g->count_c;
 	if (check_ff(*g) == 0)

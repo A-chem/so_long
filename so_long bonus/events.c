@@ -56,7 +56,6 @@ static void	move_player(t_game *g, int new_x, int new_y)
 		return ;
 	if (g->map[new_x][new_y] == '1')
 		return ;
-	// move_enemy_toward_player(g);	
 	render_map(g);
 	printf("Moves: %d\n", g->move);
 }
