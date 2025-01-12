@@ -6,7 +6,7 @@
 /*   By: achemlal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:39:54 by achemlal          #+#    #+#             */
-/*   Updated: 2025/01/09 13:40:02 by achemlal         ###   ########.fr       */
+/*   Updated: 2025/01/11 14:56:27 by achemlal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,18 @@ int	exit_window(t_game *g)
 	mlx_destroy_window(g->mlx, g->win);
 	exit(0);
 	return (0);
+}
+
+void	free_enemies(t_enemy *enemies)
+{
+	t_enemy	*current;
+	t_enemy	*next;
+
+	current = enemies;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
 }

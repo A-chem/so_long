@@ -26,11 +26,12 @@
 
 typedef struct data_enemy
 {
-	size_t	enemy_x;
-	size_t	enemy_y;
-	int		direction;
-	struct  data_enemy *next;
-}			t_enemy;
+	size_t				enemy_x;
+	size_t				enemy_y;
+	int					direction;
+	int					horizontal_direction;
+	struct data_enemy	*next;
+}						t_enemy;
 
 typedef struct data_game
 {
@@ -55,7 +56,7 @@ typedef struct data_game
 	size_t	player_y;
 	int		player_anim;
 	size_t	count_exit;
-	t_enemy *enemies; 
+	t_enemy	*enemies;
 }			t_game;
 
 int		check_map(char *pat_str, t_game *g);
@@ -70,7 +71,11 @@ int		exit_window(t_game *g);
 void	free_map(char **map);
 void	cleanup_game(t_game *g);
 int		check_enemy(t_game *g);
-void 	move_enemy(t_game *g);
-int loop_game(t_game *g);
+void	move_enemy(t_game *g);
+void	move_direction(t_game *g, t_enemy *current);
+void	move_horizontal(t_game *g, t_enemy *current);
+int		loop_game(t_game *g);
+void	display_move_count(t_game *g);
+void	free_enemies(t_enemy *enemies);
 
 #endif

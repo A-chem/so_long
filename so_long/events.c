@@ -57,7 +57,7 @@ static void	move_player(t_game *g, int new_x, int new_y)
 	if (g->map[new_x][new_y] == '1')
 		return ;
 	render_map(g);
-	printf("Moves: %d\n", g->move);
+	ft_printf("Moves: %d\n", g->move);
 }
 
 static void	action_player(int key, t_game *g)

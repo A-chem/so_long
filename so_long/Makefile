@@ -2,7 +2,7 @@ NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = so_long.c get_next_line.c get_next_line_utils.c check_map.c ft_split.c ft_strncmp.c draw_map.c events.c flood_fill.c free_data.c
+SRCS = so_long.c get_next_line.c get_next_line_utils.c check_map.c ft_split.c ft_strncmp.c draw_map.c events.c flood_fill.c free_data.c ft_putchar.c 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

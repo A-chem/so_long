@@ -6,7 +6,7 @@
 /*   By: achemlal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:07:32 by achemlal          #+#    #+#             */
-/*   Updated: 2025/01/07 18:38:59 by achemlal         ###   ########.fr       */
+/*   Updated: 2025/01/11 14:57:41 by achemlal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ static int	result_check(t_game *g, char *line)
 	g->map = ft_split(g->str, '\n');
 	if (!g->map)
 		return (cleanup_game(g), 0);
-	if (check_rect(g) == 0 || check_wall_elements(g) == 0 || check_enemy(g) == 0)
+	if (check_rect(g) == 0 || check_wall_elements(g) == 0
+		|| check_enemy(g) == 0)
 		return (cleanup_game(g), 0);
 	g->count_exit = g->count_c;
 	if (check_ff(*g) == 0)

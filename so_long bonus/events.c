@@ -6,7 +6,7 @@
 /*   By: achemlal <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:28:06 by achemlal          #+#    #+#             */
-/*   Updated: 2025/01/07 16:35:45 by achemlal         ###   ########.fr       */
+/*   Updated: 2025/01/11 15:05:47 by achemlal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static void	move_player(t_game *g, int new_x, int new_y)
 	if (g->map[new_x][new_y] == '1')
 		return ;
 	render_map(g);
-	printf("Moves: %d\n", g->move);
 }
 
 static void	action_player(int key, t_game *g)
@@ -78,13 +77,12 @@ static void	action_player(int key, t_game *g)
 		move_player(g, g->player_x, g->player_y + 1);
 	}
 }
+
 int	handle_keypress(int key, t_game *g)
 {
 	if (key == ESC_KEY)
 		exit_window(g);
 	if (key == W_KEY || key == S_KEY || key == A_KEY || key == D_KEY)
-   		action_player(key, g);
-
-		
+		action_player(key, g);
 	return (0);
 }
