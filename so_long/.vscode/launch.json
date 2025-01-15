@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/mnt/homes/achemlal/Desktop/so_long",
-      "program": "/mnt/homes/achemlal/Desktop/so_long/build/Debug/outDebug"
+      "cwd": "/mnt/homes/achemlal/Desktop/so_long/Mandatory",
+      "program": "/mnt/homes/achemlal/Desktop/so_long/Mandatory/build/Debug/outDebug"
     }
   ]
 }
