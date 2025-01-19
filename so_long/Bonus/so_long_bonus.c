@@ -16,12 +16,12 @@ static int	is_valid_map( char *pat_str, t_game *g)
 {
 	if (ft_strncmp(pat_str + ft_strlen(pat_str) - 4, ".ber", 4) != 0)
 	{
-		perror("Error Extention (.ber). Sorry");
+		perror("Error : Extention (.ber). Sorry");
 		return (0);
 	}
 	if (check_map(pat_str, g) == 0)
 	{
-		perror("Your map not valid !!!. Sorry");
+		perror("Error : Your map not valid !!!. Sorry");
 		return (0);
 	}
 	else
@@ -60,7 +60,7 @@ int	main(int argc, char **argv)
 	game.enemies = NULL;
 	if (argc != 2)
 	{
-		perror("Your path not valid !!!. Sorry");
+		perror("Error : Your path not valid !!!. Sorry");
 		return (0);
 	}
 	pat_str = argv[1];

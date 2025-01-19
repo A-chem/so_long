@@ -40,12 +40,12 @@ static int	check_rect(t_game *g)
 		{
 			if (ft_strlen(g->map[i]) != ft_strlen(g->map[i + 1]))
 				return (0);
-			if (i == 0 || i == g->num_line - 1)
-				check_borders(g, i);
-			if (g->map[i][0] != '1'
-				|| g->map[i][ft_strlen(g->map[i]) - 1] != '1')
-				return (0);
 		}
+		if ((i == 0 || i == g->num_line - 1) && !check_borders(g, i))
+			return (0);
+		if (g->map[i][0] != '1'
+			|| g->map[i][ft_strlen(g->map[i]) - 1] != '1')
+			return (0);
 		i++;
 	}
 	len = ft_strlen(g->str);
