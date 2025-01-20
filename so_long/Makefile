@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=leak
 
 NAME = so_long
 NAME_BONUS = so_long_bonus
@@ -10,10 +10,10 @@ SRC = ./Mandatory/so_long.c ./Mandatory/get_next_line.c ./Mandatory/get_next_lin
       ./Mandatory/ft_unsigned_putnbr.c ./Mandatory/ft_printf.c
 OBJ = $(SRC:.c=.o)
 
-SRC_BONUS = ./Bonus/so_long_bonus.c ./Bonus/get_next_line.c ./Bonus/get_next_line_utils.c \
-            ./Bonus/check_map.c ./Bonus/ft_split.c ./Bonus/ft_strncmp.c ./Bonus/load_img.c \
-            ./Bonus/render_map.c ./Bonus/events.c ./Bonus/flood_fill.c ./Bonus/free_data.c \
-            ./Bonus/enemy.c ./Bonus/move_count.c ./Bonus/move_enemy.c
+SRC_BONUS = ./Bonus/so_long_bonus.c ./Bonus/get_next_line_bonus.c ./Bonus/get_next_line_utils_bonus.c \
+            ./Bonus/check_map_bonus.c ./Bonus/ft_split_bonus.c ./Bonus/ft_strncmp_bonus.c ./Bonus/load_img_bonus.c \
+            ./Bonus/render_map_bonus.c ./Bonus/events_bonus.c ./Bonus/flood_fill_bonus.c ./Bonus/free_data_bonus.c \
+            ./Bonus/enemy_bonus.c ./Bonus/move_count_bonus.c ./Bonus/move_enemy_bonus.c
 BONUS_OBJ = $(SRC_BONUS:.c=.o)
 
 

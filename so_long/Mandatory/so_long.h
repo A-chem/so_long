@@ -57,6 +57,5 @@ void	render_map(t_game *g);
 int		handle_keypress(int keycode, t_game *g);
 int		exit_window(t_game *g);
 void	free_map(char **map);
-void	cleanup_game(t_game *g);
 
 #endif

@@ -14,7 +14,7 @@
 # define SO_LONG_BONUS_H
 
 # include "mlx.h"
-# include "get_next_line.h"
+# include "get_next_line_bonus.h"
 # include <fcntl.h>
 # include <stdio.h>
 

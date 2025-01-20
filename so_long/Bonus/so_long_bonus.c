@@ -37,18 +37,19 @@ static int	is_graphic_mlx(t_game *g)
 	if (g->ww > 5120 || g->wh > 2880)
 	{
 		perror("Error: Invalid map dimensions !!!. Sorry");
+		free(g->mlx);
 		return (0);
 	}
 	g->win = mlx_new_window(g->mlx, g->ww, g->wh, "So Long Game");
 	if (!g->win)
-		return (0);
-	load_img(g);
-	render_map(g);
-	g->move = 0;
-	mlx_hook(g->win, 2, 0, handle_keypress, g);
-	mlx_hook(g->win, 17, 0, exit_window, g);
-	mlx_loop_hook(g->mlx, loop_game, g);
-	mlx_loop(g->mlx);
+		return (free(g->mlx), 0);
+	// load_img(g);
+	// render_map(g);
+	// g->move = 0;
+	// mlx_hook(g->win, 2, 0, handle_keypress, g);
+	// mlx_hook(g->win, 17, 0, exit_window, g);
+	// mlx_loop_hook(g->mlx, loop_game, g);
+	// mlx_loop(g->mlx);
 	return (0);
 }
 
@@ -66,9 +67,7 @@ int	main(int argc, char **argv)
 	pat_str = argv[1];
 	if (is_valid_map(pat_str, &game) == 0)
 		return (0);
-	else
-	{
-		is_graphic_mlx(&game);
-	}
+	if (is_graphic_mlx(&game) == 0)
+		return (free_map (game.map), free(game.str), close(game.fd), 0);
 	return (0);
 }

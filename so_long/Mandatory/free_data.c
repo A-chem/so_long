@@ -28,16 +28,6 @@ void	free_map(char **map)
 	return ;
 }
 
-void	cleanup_game(t_game *g)
-{
-	if (g->str)
-		free(g->str);
-	if (g->map)
-		free_map(g->map);
-	if (g->fd >= 0)
-		close(g->fd);
-}
-
 int	exit_window(t_game *g)
 {
 	mlx_clear_window(g->mlx, g->win);

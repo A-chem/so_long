@@ -72,5 +72,5 @@ int	check_ff(t_game g)
 		}
 		i++;
 	}
-	return (free_map(copy_map), free(g.str), 1);
+	return (free_map(copy_map), 1);
 }

@@ -101,11 +101,11 @@ static int	result_check(t_game *g, char *line)
 	}
 	g->map = ft_split(g->str, '\n');
 	if (!g->map)
-		return (cleanup_game(g), 0);
+		return (0);
 	if (check_rect(g) == 0 || check_wall_elements(g) == 0)
-		return (cleanup_game(g), 0);
+		return (0);
 	if (check_ff(*g) == 0)
-		return (cleanup_game(g), 0);
+		return (0);
 	return (1);
 }
 
